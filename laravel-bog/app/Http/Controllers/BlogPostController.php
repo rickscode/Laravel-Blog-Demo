@@ -10,12 +10,14 @@ class BlogPostController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function index()
     {
         $posts = BlogPost::all(); //fetch all blog posts from DB
-        return $posts; //returns the fetched posts
+        return view('blog.index', [
+            'posts' => $posts,
+        ]);
     }
 
     /**
@@ -43,11 +45,13 @@ class BlogPostController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\BlogPost  $blogPost
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function show(BlogPost $blogPost)
     {
-        return $blogPost;
+        return view('blog.show', [
+            'post' => $blogPost,
+        ]);
     }
 
     /**
