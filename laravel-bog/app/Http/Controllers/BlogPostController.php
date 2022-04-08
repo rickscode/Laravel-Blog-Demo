@@ -64,11 +64,13 @@ class BlogPostController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\BlogPost  $blogPost
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit(BlogPost $blogPost)
     {
-        //
+        return view('blog.edit', [
+            'post' => $blogPost,
+        ]);
     }
 
     /**
@@ -76,11 +78,16 @@ class BlogPostController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\BlogPost  $blogPost
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
     public function update(Request $request, BlogPost $blogPost)
     {
-        //
+        $blogPost->update([
+            'title' => $request->title,
+            'body' => $request->body
+        ]);
+
+        return redirect('blog/' . $blogPost->id);
     }
 
     /**
