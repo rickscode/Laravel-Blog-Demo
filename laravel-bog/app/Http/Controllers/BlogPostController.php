@@ -94,10 +94,12 @@ class BlogPostController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\BlogPost  $blogPost
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
     public function destroy(BlogPost $blogPost)
     {
-        //
+        $blogPost->delete();
+
+        return redirect('/blog');
     }
 }
